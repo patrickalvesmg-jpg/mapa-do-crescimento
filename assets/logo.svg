@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 300" role="img" aria-label="Mariana Freitas — Crescimento Empresarial">
+  <!--
+    Logo reconstruída em vetor a partir do arquivo original.
+    Cores herdam de currentColor (marca) e da variável de acento via .accent,
+    para servir tanto sobre marfim quanto sobre azul tinta.
+  -->
+  <g fill="currentColor">
+    <!-- Coluna 1 (mais baixa, à esquerda) -->
+    <path d="M150 196c0-30 9-50 27-62v78h-27z"/>
+    <!-- Coluna 2 (média) -->
+    <path d="M204 212V128c0-32 11-54 32-68v152h-32z"/>
+    <!-- Coluna 3 (alta, à direita, com o pé curvo) -->
+    <path d="M272 212c14-6 20-18 20-38V62l30-22v172h-50z"/>
+  </g>
+  <!-- Traço curvo terracota que sobe até a estrela -->
+  <path class="accent" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"
+        d="M140 202c4-52 30-96 80-128 28-18 60-32 100-46"/>
+  <!-- Estrela de quatro pontas -->
+  <path class="accent" d="M322 0l7 26 26 7-26 7-7 26-7-26-26-7 26-7z" transform="translate(0 4)"/>
+</svg>

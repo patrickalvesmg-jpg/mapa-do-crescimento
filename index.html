@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa do Crescimento — Mariana Freitas</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Descubra qual trava está segurando o crescimento da sua clínica e o que fazer nos próximos 90 dias. Diagnóstico calculado a partir dos seus últimos 6 meses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --marfim:#F3EEE5;
+  --tinta:#15232D;
+  --terra:#B96347;
+  --oliva:#747A64;
+  --grafite:#292D30;
+
+  --papel:#FAF7F1;
+  --linha:#D9D1C4;
+  --linha-forte:#C3B8A6;
+  --sobre-tinta:#C8D2D8;
+  --mutado:#6A7076;
+
+  --serif:"Fraunces",Georgia,serif;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+
+  --medida:min(1180px,100% - 3rem);
+  --estreito:min(720px,100%);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+body{
+  margin:0;
+  background:var(--papel);
+  color:var(--grafite);
+  font-family:var(--sans);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{max-width:100%;display:block}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.08;letter-spacing:-.02em;margin:0;color:var(--tinta)}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--terra);outline-offset:3px}
+
+/* ---------- estrutura ---------- */
+.faixa{padding:clamp(3.4rem,7vw,6rem) 0}
+.medida{width:var(--medida);margin-inline:auto}
+.escuro{background:var(--tinta);color:var(--sobre-tinta)}
+.escuro h1,.escuro h2,.escuro h3,.escuro h4{color:var(--marfim)}
+.marfim{background:var(--marfim)}
+
+/* Motivo de cota técnica: marcação de escala à esquerda da seção */
+.cotada{position:relative}
+.cotada::before{
+  content:"";position:absolute;left:0;top:clamp(3.4rem,7vw,6rem);bottom:clamp(3.4rem,7vw,6rem);width:1px;
+  background:repeating-linear-gradient(to bottom,var(--linha-forte) 0 10px,transparent 10px 20px);
+}
+.escuro.cotada::before{background:repeating-linear-gradient(to bottom,rgba(243,238,229,.32) 0 10px,transparent 10px 20px)}
+@media (max-width:900px){.cotada::before{display:none}}
+
+.rotulo{
+  font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--terra);margin:0 0 1.1rem;display:flex;align-items:center;gap:.6rem;
+}
+.rotulo::before{content:"";width:22px;height:2px;background:var(--terra);flex:none}
+.escuro .rotulo{color:#E0A08A}
+.escuro .rotulo::before{background:#E0A08A}
+
+/* ---------- topo ---------- */
+.topo{
+  position:sticky;top:0;z-index:50;background:rgba(250,247,241,.92);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--linha);
+}
+.topo .medida{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:74px}
+.marca{display:flex;align-items:center;gap:.8rem;color:var(--tinta);text-decoration:none}
+.marca svg{width:46px;height:auto;flex:none}
+.marca .accent{color:var(--terra);fill:var(--terra);stroke:var(--terra)}
+.marca-txt{font-family:var(--serif);font-size:16px;font-weight:600;line-height:1.1;letter-spacing:.01em}
+.marca-txt span{display:block;font-family:var(--sans);font-size:10.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--oliva);margin-top:3px}
+
+/* ---------- botões ---------- */
+.btn{
+  display:inline-block;border:0;cursor:pointer;text-decoration:none;text-align:center;
+  font-family:var(--sans);font-size:16px;font-weight:600;line-height:1.25;
+  padding:1.05rem 1.9rem;border-radius:3px;transition:background-color .18s,transform .18s;
+}
+.btn-terra{background:var(--terra);color:#fff}
+.btn-terra:hover{background:#A5563D}
+.btn-terra:active{transform:translateY(1px)}
+.btn-tinta{background:var(--tinta);color:var(--marfim)}
+.btn-tinta:hover{background:#0E1920}
+.btn-linha{background:transparent;color:var(--tinta);box-shadow:inset 0 0 0 1.5px var(--linha-forte)}
+.btn-linha:hover{box-shadow:inset 0 0 0 1.5px var(--tinta)}
+.btn-peq{padding:.7rem 1.2rem;font-size:14.5px}
+@media (max-width:640px){.topo .btn{display:none}}
+
+/* ---------- herói ---------- */
+.heroi{padding:clamp(3rem,6vw,5rem) 0 clamp(3rem,6vw,4.6rem)}
+.heroi-grade{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2.5rem,5vw,4.5rem);align-items:center}
+.heroi h1{font-size:clamp(1.72rem,4.2vw,3rem);text-transform:uppercase;letter-spacing:-.012em;line-height:1.12}
+.heroi .sub{margin-top:1.6rem;font-size:clamp(1.02rem,1.5vw,1.14rem);color:#4A5157;max-width:34em}
+.heroi .sub strong{color:var(--tinta);font-weight:600}
+.heroi .sub + .sub{margin-top:1rem}
+.heroi-acoes{margin-top:2.2rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center}
+.selo{margin-top:1.1rem;font-size:13.5px;color:var(--mutado);max-width:38em}
+
+/* Foto do herói (só desktop) — dissolve na base */
+.heroi-foto{margin:0}
+.moldura{position:relative;display:block}
+.heroi-foto img{
+  width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;
+  display:block;border-radius:3px;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 58%,rgba(0,0,0,.72) 76%,rgba(0,0,0,.28) 90%,transparent 100%);
+          mask-image:linear-gradient(to bottom,#000 0%,#000 58%,rgba(0,0,0,.72) 76%,rgba(0,0,0,.28) 90%,transparent 100%);
+}
+.heroi-assina{
+  margin-top:-1.2rem;position:relative;z-index:2;
+  padding-left:.9rem;border-left:3px solid var(--terra);
+}
+.heroi-assina b{display:block;font-family:var(--serif);font-size:1.06rem;font-weight:600;color:var(--tinta);line-height:1.2}
+.heroi-assina span{display:block;font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;margin-top:.28rem;color:var(--oliva);font-weight:600}
+
+@media (max-width:900px){
+  .heroi-grade{grid-template-columns:1fr;gap:2.2rem}
+  .heroi-foto{display:none}
+}
+
+/* ---------- corrente de dor ---------- */
+.elos{display:grid;gap:0;margin-top:2.6rem;border-top:1px solid var(--linha)}
+.elo{
+  display:grid;grid-template-columns:auto 1fr auto;gap:clamp(.9rem,2.2vw,1.8rem);
+  align-items:center;padding:1.45rem 0;border-bottom:1px solid var(--linha);
+}
+.elo-n{
+  font-family:var(--sans);font-size:12px;font-weight:700;color:var(--terra);
+  width:26px;height:26px;display:grid;place-items:center;border:1.5px solid var(--terra);
+  border-radius:50%;flex:none;
+}
+.elo-txt h3{font-size:clamp(1.02rem,1.9vw,1.16rem);line-height:1.3;margin-bottom:.3rem}
+.elo-txt p{font-size:14.8px;color:#5A6167;line-height:1.55}
+.elo-eco{
+  font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--oliva);
+  text-align:right;max-width:15em;line-height:1.4;
+}
+@media (max-width:860px){
+  .elo{grid-template-columns:auto 1fr;gap:.9rem;padding:1.3rem 0}
+  .elo-eco{grid-column:2;text-align:left;margin-top:.5rem;max-width:none}
+}
+
+.virada{margin-top:3.2rem;padding:2.4rem 2.2rem;background:var(--tinta);color:var(--sobre-tinta);border-radius:4px}
+.virada p{font-size:clamp(1.12rem,2vw,1.4rem);line-height:1.45;font-family:var(--serif);color:var(--marfim);max-width:30em}
+.virada p + p{margin-top:1.1rem;font-family:var(--sans);font-size:1.02rem;line-height:1.62;color:var(--sobre-tinta);max-width:44em}
+
+/* ---------- inimigo ---------- */
+.riscados{margin-top:2.6rem;display:grid;gap:0;max-width:52em}
+.riscado{display:grid;grid-template-columns:auto 1fr;gap:1.1rem;align-items:start;padding:1.35rem 0;border-bottom:1px solid var(--linha)}
+.riscado:first-child{border-top:1px solid var(--linha)}
+.riscado .x{color:var(--terra);font-size:1.15rem;line-height:1.5;font-weight:600}
+.riscado p{font-size:16px;color:#4F565C;line-height:1.58}
+.contraste{margin-top:2.6rem;max-width:40em}
+.contraste p{font-family:var(--serif);font-size:clamp(1.3rem,2.6vw,1.72rem);line-height:1.28;color:var(--tinta)}
+.contraste p + p{margin-top:.9rem;font-family:var(--sans);font-size:1.02rem;line-height:1.6;color:#545B61}
+
+/* ---------- mecanismo ---------- */
+.principios{margin-top:3.2rem;display:grid;gap:1px;background:rgba(243,238,229,.2)}
+.principio{background:var(--tinta);padding:2.1rem 0 2.1rem;display:grid;grid-template-columns:auto 1fr;gap:clamp(1.2rem,3vw,2.6rem);align-items:start}
+.principio .ord{font-family:var(--serif);font-size:2.1rem;line-height:1;color:var(--terra);font-weight:400;min-width:1.6em}
+.principio h3{font-size:clamp(1.18rem,2.2vw,1.45rem);margin-bottom:.8rem;line-height:1.22}
+.principio p{font-size:15.8px;line-height:1.66;max-width:46em}
+.principio p + p{margin-top:.85rem}
+@media (max-width:640px){
+  .principio{grid-template-columns:1fr;gap:.7rem}
+  .principio .ord{font-size:1.6rem}
+}
+
+.mini{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.5rem}
+.mini li{position:relative;padding-left:1.35rem;font-size:14.6px;line-height:1.5;color:#B7C3CA}
+.mini li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:6px;background:var(--terra);border-radius:50%}
+.mini li b{color:var(--marfim);font-weight:600}
+
+/* Etiquetas do sistema do produto */
+.etiquetas{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.1rem}
+.et{font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.42rem .75rem;border-radius:2px}
+.et-obs{background:rgba(243,238,229,.14);color:var(--marfim)}
+.et-calc{background:rgba(116,122,100,.42);color:#E4E9DC}
+.et-lac{background:rgba(185,99,71,.24);color:#E9B5A2}
+.et-leit{background:rgba(243,238,229,.07);color:#A9B7BF}
+
+/* ---------- entrega ---------- */
+.entregas{margin-top:3rem;display:grid;gap:1px;background:var(--linha);border:1px solid var(--linha);border-radius:4px;overflow:hidden}
+.entrega{background:var(--papel);padding:1.9rem 1.8rem;display:grid;grid-template-columns:auto 1fr;gap:1.3rem;align-items:start}
+.entrega .marca-cota{width:26px;height:26px;flex:none;position:relative;margin-top:.15rem}
+.entrega .marca-cota::before{content:"";position:absolute;inset:0;border-left:2px solid var(--terra);border-bottom:2px solid var(--terra)}
+.entrega h3{font-size:1.1rem;margin-bottom:.5rem}
+.entrega p{font-size:15.2px;color:#545B61;line-height:1.6;max-width:52em}
+@media (max-width:640px){.entrega{padding:1.5rem 1.2rem;gap:1rem}}
+
+/* ---------- autoridade ---------- */
+.bio{display:grid;grid-template-columns:1.22fr .78fr;gap:clamp(2.2rem,5vw,4rem);align-items:start}
+.bio-foto{position:relative}
+.bio-foto img{
+  width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 22%;
+  border-radius:3px;filter:saturate(.98);display:block;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 58%,rgba(0,0,0,.72) 76%,rgba(0,0,0,.28) 90%,transparent 100%);
+          mask-image:linear-gradient(to bottom,#000 0%,#000 58%,rgba(0,0,0,.72) 76%,rgba(0,0,0,.28) 90%,transparent 100%);
+}
+.bio-foto{position:sticky;top:98px;margin:0;order:2}
+.bio-foto .placa{
+  position:relative;z-index:2;margin-top:-1.2rem;padding-left:.9rem;border-left:3px solid var(--terra);
+}
+.bio-foto .placa b{display:block;font-family:var(--serif);font-size:1.04rem;font-weight:600;color:var(--tinta);line-height:1.2}
+.bio-foto .placa span{display:block;font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;margin-top:.28rem;color:var(--oliva);font-weight:600}
+.bio h2{font-size:clamp(1.65rem,3.6vw,2.5rem);margin-bottom:1.5rem}
+.bio p{font-size:16.5px;line-height:1.68;color:#4A5157;max-width:40em}
+.bio p + p{margin-top:1rem}
+.bio strong{color:var(--tinta);font-weight:600}
+.obra{margin:2rem 0;padding:1.8rem 1.8rem;background:var(--tinta);border-radius:4px}
+.obra p{font-family:var(--serif);font-size:clamp(1.12rem,2.2vw,1.35rem);line-height:1.38;color:var(--marfim);max-width:30em}
+.obra p + p{margin-top:.85rem;font-family:var(--sans);font-size:15.5px;line-height:1.62;color:var(--sobre-tinta)}
+.quatro{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.5rem 0 0}
+.quatro span{font-size:13.5px;font-weight:600;color:var(--tinta);background:var(--marfim);padding:.5rem .9rem;border-radius:2px}
+@media (max-width:860px){
+  .bio{grid-template-columns:1fr;gap:2.2rem}
+  .bio-foto{max-width:420px}
+}
+
+/* ---------- filtro ---------- */
+.filtro{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:2.8rem;border:1px solid var(--linha);border-radius:4px;overflow:hidden}
+.filtro-col{padding:2.1rem 1.9rem;background:var(--papel)}
+.filtro-col + .filtro-col{border-left:1px solid var(--linha);background:#F5F1EA}
+.filtro-col h3{font-size:1.12rem;margin-bottom:1.2rem}
+.filtro-col ul{list-style:none;margin:0;padding:0;display:grid;gap:.85rem}
+.filtro-col li{position:relative;padding-left:1.7rem;font-size:15.3px;line-height:1.55;color:#4F565C}
+.filtro-col li::before{position:absolute;left:0;top:0;font-weight:600}
+.sim li::before{content:"✓";color:var(--oliva)}
+.nao li::before{content:"✕";color:var(--terra)}
+.corte{margin-top:2.4rem;max-width:36em}
+.corte p{font-family:var(--serif);font-size:clamp(1.18rem,2.4vw,1.5rem);line-height:1.32;color:var(--tinta)}
+@media (max-width:700px){
+  .filtro{grid-template-columns:1fr}
+  .filtro-col + .filtro-col{border-left:0;border-top:1px solid var(--linha)}
+}
+
+/* ---------- oferta ---------- */
+.oferta{display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(2.2rem,5vw,4rem);align-items:center}
+.ancora p{font-size:16.5px;line-height:1.68;color:var(--sobre-tinta);max-width:38em}
+.ancora p + p{margin-top:1rem}
+.ancora strong{color:var(--marfim);font-weight:600}
+.caixa{background:var(--marfim);color:var(--grafite);padding:2.1rem 1.9rem;border-radius:4px}
+.caixa .preco{display:flex;align-items:baseline;gap:.45rem;margin-bottom:.4rem}
+.caixa .preco .cifra{font-family:var(--serif);font-size:1.5rem;color:var(--tinta);font-weight:600}
+.caixa .preco .num{font-family:var(--serif);font-size:clamp(3rem,7vw,3.9rem);line-height:1;color:var(--tinta);font-weight:600;letter-spacing:-.03em}
+.caixa .cond{font-size:14.5px;color:var(--mutado);margin-bottom:1.6rem}
+.caixa .btn{width:100%;padding-block:1.15rem}
+.caixa ul{list-style:none;margin:1.4rem 0 0;padding:1.3rem 0 0;border-top:1px solid var(--linha);display:grid;gap:.62rem}
+.caixa li{font-size:14.6px;color:#4F565C;position:relative;padding-left:1.5rem;line-height:1.5}
+.caixa li::before{content:"";position:absolute;left:0;top:.52em;width:7px;height:7px;background:var(--oliva);border-radius:50%}
+.garantia{margin-top:1.4rem;padding:1.15rem 1.25rem;background:rgba(116,122,100,.12);border-left:3px solid var(--oliva);border-radius:0 3px 3px 0}
+.garantia b{display:block;font-family:var(--serif);font-size:1.02rem;color:var(--tinta);margin-bottom:.4rem}
+.garantia p{font-size:14.3px;line-height:1.58;color:#4F565C}
+@media (max-width:860px){.oferta{grid-template-columns:1fr;gap:2.4rem}}
+
+/* ---------- perguntas ---------- */
+.perguntas{margin-top:2.8rem;max-width:58em;border-top:1px solid var(--linha)}
+.pergunta{border-bottom:1px solid var(--linha)}
+.pergunta summary{
+  cursor:pointer;list-style:none;padding:1.4rem 2.4rem 1.4rem 0;position:relative;
+  font-family:var(--serif);font-size:clamp(1.02rem,1.9vw,1.18rem);font-weight:600;color:var(--tinta);line-height:1.32;
+}
+.pergunta summary::-webkit-details-marker{display:none}
+.pergunta summary::after{
+  content:"";position:absolute;right:.4rem;top:1.72em;width:11px;height:11px;
+  border-right:2px solid var(--terra);border-bottom:2px solid var(--terra);
+  transform:translateY(-50%) rotate(45deg);transition:transform .2s;
+}
+.pergunta[open] summary::after{transform:translateY(-25%) rotate(-135deg)}
+.pergunta .resp{padding:0 2.4rem 1.6rem 0;font-size:15.8px;line-height:1.68;color:#4F565C;max-width:48em}
+
+/* ---------- fecho ---------- */
+.fecho h2{font-size:clamp(1.8rem,4.4vw,3rem);max-width:17em}
+.caminhos{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:2.8rem;background:rgba(243,238,229,.2);border-radius:4px;overflow:hidden}
+.caminho{background:var(--tinta);padding:2rem 1.9rem}
+.caminho b{display:block;font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;margin-bottom:.9rem;color:#8898A2}
+.caminho p{font-size:15.8px;line-height:1.64;color:var(--sobre-tinta)}
+.caminho.bom{background:#1B2E3A}
+.caminho.bom b{color:#E0A08A}
+.caminho.bom p{color:var(--marfim)}
+.fecho-cta{margin-top:2.8rem}
+.fecho-cta p{font-family:var(--serif);font-size:clamp(1.18rem,2.4vw,1.5rem);color:var(--marfim);max-width:26em;line-height:1.32;margin-bottom:1.6rem}
+.fecho-selo{margin-top:1rem;font-size:13.5px;color:#93A2AB}
+@media (max-width:640px){.caminhos{grid-template-columns:1fr}}
+
+/* ---------- ponte ---------- */
+.ponte{border-top:1px solid var(--linha);padding:clamp(3rem,6vw,4.5rem) 0}
+.ponte-grade{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(1.8rem,4vw,3.5rem);align-items:start}
+.ponte h3{font-size:clamp(1.25rem,2.6vw,1.6rem);line-height:1.22}
+.ponte p{font-size:15.8px;line-height:1.66;color:#545B61;max-width:44em}
+.ponte p + p{margin-top:.85rem}
+.ponte .btn{margin-top:1.5rem}
+@media (max-width:760px){.ponte-grade{grid-template-columns:1fr}}
+
+/* ---------- rodapé ---------- */
+.rodape{background:var(--tinta);color:#8898A2;padding:3rem 0 2.4rem;font-size:13.5px}
+.rodape .medida{display:flex;flex-wrap:wrap;gap:1.6rem;justify-content:space-between;align-items:center}
+.rodape .marca{color:var(--marfim)}
+.rodape .marca-txt span{color:#8898A2}
+.rodape a{color:#A9B7BF}
+
+/* ---------- mobile ---------- */
+@media (max-width:640px){
+  body{font-size:16.2px}
+  .medida{width:min(1180px,100% - 2.2rem)}
+  .faixa{padding:3rem 0}
+
+  /* textos centralizados no celular */
+  .heroi,.heroi h1,.heroi .sub,.selo,.heroi-acoes{text-align:center}
+  .heroi h1{font-size:clamp(1.62rem,7.4vw,2.1rem)}
+  .heroi .sub,.selo{margin-inline:auto}
+  .heroi-acoes{justify-content:center}
+  .heroi-acoes .btn{width:100%}
+  .rotulo{justify-content:center}
+
+  .faixa h2,.faixa > .medida > p{text-align:center}
+  .faixa h2{margin-inline:auto}
+  .virada{text-align:center}
+  .virada p{margin-inline:auto}
+  .contraste,.corte{text-align:center;margin-inline:auto}
+  .contraste p,.corte p{margin-inline:auto}
+
+  .elo{text-align:left}
+  .riscado{text-align:left}
+  .principio{text-align:left}
+  .entrega{text-align:left}
+  .filtro-col{text-align:left}
+  .pergunta summary,.pergunta .resp{text-align:left}
+  .bio{text-align:center}
+  .bio p,.bio h2{margin-inline:auto}
+  .bio-foto{position:static;margin-inline:auto}
+  .quatro{justify-content:center}
+  .obra{text-align:center}
+  .obra p{margin-inline:auto}
+  .ancora{text-align:center}
+  .ancora p{margin-inline:auto}
+  .caixa .preco{justify-content:center}
+  .caixa .cond{text-align:center}
+  .caixa li,.garantia{text-align:left}
+  .fecho h2,.fecho-cta{text-align:center}
+  .fecho h2,.fecho-cta p{margin-inline:auto}
+  .caminho{text-align:center}
+  .ponte-grade{text-align:center}
+  .ponte p,.ponte h3{margin-inline:auto}
+  .rodape .medida{justify-content:center;text-align:center}
+  .rodape .marca{justify-content:center}
+}
+
+/* barra fixa mobile */
+.barra-movel{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;
+  padding:.7rem .9rem calc(.7rem + env(safe-area-inset-bottom));
+  background:rgba(21,35,45,.97);backdrop-filter:blur(8px);
+}
+.barra-movel .btn{width:100%}
+@media (max-width:640px){
+  .barra-movel{display:block}
+  body{padding-bottom:78px}
+}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="medida">
+    <a class="marca" href="#topo">
+      <svg viewBox="128 0 240 220" aria-hidden="true">
+        <g fill="currentColor">
+          <path d="M150 196c0-30 9-50 27-62v78h-27z"/>
+          <path d="M204 212V128c0-32 11-54 32-68v152h-32z"/>
+          <path d="M272 212c14-6 20-18 20-38V62l30-22v172h-50z"/>
+        </g>
+        <path class="accent" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" d="M140 202c4-52 30-96 80-128 28-18 60-32 100-46"/>
+        <path class="accent" d="M322 4l7 26 26 7-26 7-7 26-7-26-26-7 26-7z" stroke="none"/>
+      </svg>
+      <span class="marca-txt">Mariana Freitas<span>Crescimento Empresarial</span></span>
+    </a>
+    <a class="btn btn-tinta btn-peq" href="#oferta">Quero meu Mapa</a>
+  </div>
+</header>
+
+<main id="topo">
+
+  <!-- HERÓI -->
+  <section class="heroi">
+    <div class="medida heroi-grade">
+      <div>
+        <h1>Um mês sua clínica fatura R$ 40 mil. No outro, R$ 15 mil. E você não sabe dizer o que mudou.</h1>
+        <p class="sub">Não é sazonalidade. Não é o mercado. É que ninguém nunca te mostrou de onde vem o seu faturamento — então você não tem como repetir o mês bom nem evitar o mês ruim.</p>
+        <p class="sub">O Mapa do Crescimento lê os últimos 6 meses da sua clínica e te devolve <strong>uma coisa só</strong>: qual trava está segurando o seu crescimento agora, e o que fazer nos próximos 90 dias.</p>
+        <div class="heroi-acoes">
+          <a class="btn btn-terra" href="#oferta">Quero ver minha trava — R$ 49,90</a>
+          <a class="btn btn-linha" href="#mecanismo">Como funciona</a>
+        </div>
+        <p class="selo">Você preenche em 15 minutos. 7 dias de garantia. Se não te mostrar nada que você já não soubesse, devolvemos.</p>
+      </div>
+
+      <figure class="heroi-foto">
+        <span class="moldura"><img src="assets/mariana-heroi.jpg" alt="Mariana Freitas em seu escritório."></span>
+        <figcaption class="heroi-assina">
+          <b>Mariana Freitas</b>
+          <span>Engenheira civil · Consultora</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- A CORRENTE -->
+  <section class="faixa cotada marfim">
+    <div class="medida">
+      <p class="rotulo">O que você vive todo mês</p>
+      <h2 style="font-size:clamp(1.7rem,3.9vw,2.7rem);max-width:19em">Você não tem um problema de faturamento. Você tem cinco problemas que ninguém conectou.</h2>
+      <p style="margin-top:1.4rem;max-width:44em;color:#545B61;font-size:16.5px;line-height:1.66">Toda dona de clínica que fatura acima de R$ 20 mil me conta a mesma história. Em ordens diferentes, com palavras diferentes — mas é sempre a mesma corrente:</p>
+
+      <div class="elos">
+        <div class="elo">
+          <span class="elo-n">1</span>
+          <div class="elo-txt">
+            <h3>O faturamento sobe e desce e você não controla</h3>
+            <p>Dezembro explode. Fevereiro morre. Você chama de "época", mas sabe que não é só isso.</p>
+          </div>
+          <p class="elo-eco">"Esse mês foi fraco."</p>
+        </div>
+        <div class="elo">
+          <span class="elo-n">2</span>
+          <div class="elo-txt">
+            <h3>Você não sabe de onde vem o cliente</h3>
+            <p>Instagram? Indicação? O anúncio que você pagou? Você acha. Você não sabe.</p>
+          </div>
+          <p class="elo-eco">"Acho que foi o Instagram."</p>
+        </div>
+        <div class="elo">
+          <span class="elo-n">3</span>
+          <div class="elo-txt">
+            <h3>Nada está estruturado</h3>
+            <p>O controle está na sua cabeça, num caderno, num print do WhatsApp e numa planilha parada desde maio.</p>
+          </div>
+          <p class="elo-eco">"Tá tudo aqui comigo."</p>
+        </div>
+        <div class="elo">
+          <span class="elo-n">4</span>
+          <div class="elo-txt">
+            <h3>Tudo depende de você atendendo</h3>
+            <p>Você é a clínica. Se você tira uma semana de folga, o faturamento tira junto.</p>
+          </div>
+          <p class="elo-eco">"Se eu parar, para tudo."</p>
+        </div>
+        <div class="elo">
+          <span class="elo-n">5</span>
+          <div class="elo-txt">
+            <h3>Faturou bem, mas o dinheiro não ficou</h3>
+            <p>Mês forte, conta apertada. Você olha o extrato e pensa: entrou tanto, cadê?</p>
+          </div>
+          <p class="elo-eco">"Cadê esse dinheiro?"</p>
+        </div>
+      </div>
+
+      <div class="virada">
+        <p>Esses cinco não são cinco problemas. São um problema só, aparecendo de cinco formas.</p>
+        <p>E enquanto você tenta resolver os cinco ao mesmo tempo — contratando, postando mais, fazendo promoção, cortando custo — você não resolve nenhum.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- O INIMIGO -->
+  <section class="faixa cotada">
+    <div class="medida">
+      <p class="rotulo">Por que não funcionou antes</p>
+      <h2 style="font-size:clamp(1.7rem,3.9vw,2.7rem);max-width:17em">Você já tentou resolver isso. E te venderam a mesma coisa três vezes.</h2>
+
+      <div class="riscados">
+        <div class="riscado"><span class="x">✕</span><p>A mentoria que prometia escalar sua clínica e entregou um grupo de WhatsApp com 200 pessoas.</p></div>
+        <div class="riscado"><span class="x">✕</span><p>A planilha de gestão que você comprou, abriu duas vezes e nunca mais.</p></div>
+        <div class="riscado"><span class="x">✕</span><p>O consultor que passou dois dias na sua clínica e deixou um PDF de 40 páginas com 37 ações prioritárias — o que é a mesma coisa que nenhuma prioridade.</p></div>
+        <div class="riscado"><span class="x">✕</span><p>O curso que te ensinou a postar mais, quando o seu problema nunca foi o Instagram.</p></div>
+      </div>
+
+      <div class="contraste">
+        <p>Todos cometeram o mesmo erro: começaram pela solução antes de entender o seu negócio.</p>
+        <p>Te entregaram o que funcionou para outra clínica. Não o que a sua precisa agora.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- O MECANISMO -->
+  <section class="faixa cotada escuro" id="mecanismo">
+    <div class="medida">
+      <p class="rotulo">Como o Mapa trabalha</p>
+      <h2 style="font-size:clamp(1.7rem,3.9vw,2.7rem);max-width:15em">O Mapa faz o contrário de tudo isso.</h2>
+      <p style="margin-top:1.3rem;max-width:42em;font-size:16.5px;line-height:1.66">Ele não chega com resposta pronta. Ele olha os seus números primeiro — e só depois abre a boca.</p>
+
+      <div class="principios">
+        <article class="principio">
+          <div class="ord">01</div>
+          <div>
+            <h3>Ele não te pergunta onde você está. Ele calcula.</h3>
+            <p>A maior parte das ferramentas pede que você diga qual é o seu problema. Se você soubesse, não precisaria da ferramenta. O Mapa pergunta só <strong style="color:var(--marfim);font-weight:600">para onde você quer ir</strong> — e deduz o ponto de partida a partir dos seus últimos 6 meses.</p>
+          </div>
+        </article>
+
+        <article class="principio">
+          <div class="ord">02</div>
+          <div>
+            <h3>Quando falta informação, ele fala que falta.</h3>
+            <p>Se você não tem um dado, o Mapa marca aquilo como lacuna — e te diz o que você perde por não ter. Ele nunca inventa um número para fechar uma conta bonita.</p>
+            <p>Cada coisa que ele te mostra vem etiquetada, então você sabe exatamente o que é fato e o que é interpretação:</p>
+            <div class="etiquetas">
+              <span class="et et-obs">Observado</span>
+              <span class="et et-calc">Calculado</span>
+              <span class="et et-lac">Lacuna</span>
+              <span class="et et-leit">Leitura</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="principio">
+          <div class="ord">03</div>
+          <div>
+            <h3>Ele te dá uma prioridade. Uma.</h3>
+            <p>O Mapa não procura o pior número da sua clínica. Procura a alavanca que merece atenção agora — aquela que, se você mexer, move as outras.</p>
+            <ul class="mini">
+              <li><b>Uma</b> estratégia principal por ciclo</li>
+              <li><b>Até duas</b> complementares, quando fazem sentido</li>
+              <li><b>Nunca</b> uma lista de 37 ações</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="principio">
+          <div class="ord">04</div>
+          <div>
+            <h3>Cada ação te ensina alguma coisa.</h3>
+            <p>Concluir uma tarefa não significa que deu certo. Significa que você agora tem informação para decidir o próximo passo. Por isso toda ação vem com três coisas:</p>
+            <ul class="mini">
+              <li><b>O prazo</b> — quando ela acontece dentro do ciclo</li>
+              <li><b>O que medir</b> — o número que diz se funcionou</li>
+              <li><b>O que aprender</b> — a pergunta que o ciclo responde</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENTREGA -->
+  <section class="faixa cotada">
+    <div class="medida">
+      <p class="rotulo">O que você recebe</p>
+      <h2 style="font-size:clamp(1.7rem,3.9vw,2.7rem);max-width:16em">Em 15 minutos de preenchimento, você sai com isto:</h2>
+
+      <div class="entregas">
+        <article class="entrega">
+          <div class="marca-cota" aria-hidden="true"></div>
+          <div>
+            <h3>O retrato real dos seus últimos 6 meses</h3>
+            <p>Faturamento, clientes, ticket, conversão e margem — calculados, não chutados. Com o que cresceu, o que travou e o que só parecia estar crescendo.</p>
+          </div>
+        </article>
+        <article class="entrega">
+          <div class="marca-cota" aria-hidden="true"></div>
+          <div>
+            <h3>A sua trava prioritária, nomeada</h3>
+            <p>Uma frase que responde: o que exatamente está segurando o crescimento da minha clínica agora. Com as evidências que sustentam essa conclusão e a incerteza que ainda existe.</p>
+          </div>
+        </article>
+        <article class="entrega">
+          <div class="marca-cota" aria-hidden="true"></div>
+          <div>
+            <h3>Sua rota de 90 dias, em 6 ciclos de 15 dias</h3>
+            <p>Começando pelo ciclo 1, detalhado: a estratégia principal, as ações, o prazo de cada uma, o que medir e o que você vai aprender com cada uma.</p>
+          </div>
+        </article>
+        <article class="entrega">
+          <div class="marca-cota" aria-hidden="true"></div>
+          <div>
+            <h3>A lista do que você não sabe sobre o seu próprio negócio</h3>
+            <p>Talvez a parte mais desconfortável. E a mais valiosa.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTORIDADE -->
+  <section class="faixa cotada marfim">
+    <div class="medida bio">
+      <figure class="bio-foto">
+        <span class="moldura"><img src="assets/mariana-retrato.jpg" alt="Mariana Freitas trabalhando em seu escritório."></span>
+        <figcaption class="placa">
+          <b>Mariana Freitas</b>
+          <span>Engenheira civil · Consultora</span>
+        </figcaption>
+      </figure>
+
+      <div>
+        <p class="rotulo">Quem construiu o Mapa</p>
+        <h2>O Mapa não foi feito por uma mentora. Foi feito por uma engenheira.</h2>
+
+        <p>Eu sou Mariana Freitas. Antes de trabalhar com crescimento empresarial, eu era engenheira civil.</p>
+        <p>Meu primeiro emprego depois de formada foi na <strong>obra da transposição do Rio São Francisco</strong>, liderando um time de mais de 30 pessoas. Eu tinha 23 anos.</p>
+        <p>Passei <strong>4 anos em canteiro de obra</strong> — planejando, gerenciando, negociando com fornecedor e lidando com pressão de prazo. Depois fiz pós-graduação em Gestão de Projetos.</p>
+
+        <div class="obra">
+          <p>Em obra, você não acha que a estrutura aguenta. Você mede. Você calcula. E quando falta um dado, você registra que falta — porque preencher buraco com otimismo é assim que obra cai.</p>
+          <p>Foi isso que eu trouxe para dentro do Mapa do Crescimento.</p>
+        </div>
+
+        <p>Depois da engenharia, eu montei uma loja online e uma barbearia junto com meu noivo. Foi aí que eu entendi, do outro lado do balcão, o que é olhar para o próprio negócio e não saber explicar por que um mês foi bom e o outro não.</p>
+        <p>Desde então ajudo empresas a desenhar processos, produtos, estratégias e rotinas. Sempre com os mesmos quatro princípios que funcionavam na obra:</p>
+
+        <div class="quatro">
+          <span>Organização</span>
+          <span>Previsibilidade</span>
+          <span>Indicadores</span>
+          <span>Melhoria contínua</span>
+        </div>
+
+        <p style="margin-top:1.5rem">Essa parte da minha trajetória quase nunca aparece no meu Instagram. Mas é ela que explica como eu estruturo as minhas soluções — e por que o Mapa te entrega uma prioridade calculada em vez de uma lista de achismos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTRO -->
+  <section class="faixa cotada">
+    <div class="medida">
+      <p class="rotulo">Antes de comprar</p>
+      <h2 style="font-size:clamp(1.7rem,3.9vw,2.7rem)">Isto não é para todo mundo.</h2>
+
+      <div class="filtro">
+        <div class="filtro-col sim">
+          <h3>É para você se:</h3>
+          <ul>
+            <li>Sua clínica fatura acima de R$ 20 mil por mês</li>
+            <li>Você já tentou crescer e travou sem entender por quê</li>
+            <li>Você tem pelo menos alguma noção dos seus números dos últimos meses</li>
+            <li>Você quer saber onde mexer — não quer que alguém decida por você</li>
+          </ul>
+        </div>
+        <div class="filtro-col nao">
+          <h3>Não é para você se:</h3>
+          <ul>
+            <li>Você quer alguém que te diga que está tudo bem</li>
+            <li>Você está procurando fórmula pronta que funcionou na clínica da concorrente</li>
+            <li>Você não tem nenhum registro dos últimos 6 meses, nem aproximado</li>
+            <li>Você quer terceirizar a decisão em vez de entender o negócio</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="corte">
+        <p>O Mapa te mostra a verdade dos seus números. Se você não quer olhar para ela, economize R$ 49,90.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFERTA -->
+  <section class="faixa cotada escuro" id="oferta">
+    <div class="medida oferta">
+      <div class="ancora">
+        <p class="rotulo">A conta</p>
+        <h2 style="font-size:clamp(1.7rem,3.9vw,2.6rem);margin-bottom:1.4rem">Quanto custa saber onde mexer</h2>
+        <p>Uma consultoria de diagnóstico empresarial custa entre R$ 3.000 e R$ 15.000.</p>
+        <p>Mas não é com isso que o Mapa compete.</p>
+        <p>Ele compete com o que você já gastou <strong>decidindo no escuro</strong>: a campanha que não trouxe cliente, a contratação na hora errada, a promoção que encheu a agenda e derrubou a margem, os seis meses que você passou resolvendo o problema errado.</p>
+        <p>Isso custou muito mais que R$ 49,90.</p>
+      </div>
+
+      <div class="caixa">
+        <div class="preco">
+          <span class="cifra">R$</span>
+          <span class="num">49,90</span>
+        </div>
+        <p class="cond">Pagamento único. Sem mensalidade, sem assinatura.</p>
+
+        <!-- TODO: trocar href="#" pelo link do checkout quando estiver pronto -->
+        <a class="btn btn-terra" href="#">Quero meu Mapa agora</a>
+
+        <ul>
+          <li>Acesso imediato por e-mail após a confirmação do pagamento</li>
+          <li>Preenchimento de cerca de 15 minutos</li>
+          <li>Diagnóstico dos seus últimos 6 meses</li>
+          <li>Sua trava prioritária nomeada, com as evidências</li>
+          <li>Rota de 90 dias em 6 ciclos</li>
+        </ul>
+
+        <div class="garantia">
+          <b>7 dias de garantia incondicional</b>
+          <p>Preencha, veja o seu diagnóstico e a sua rota. Se o Mapa não te mostrar nada que você já não soubesse sobre a sua própria clínica, você pede o reembolso e recebe 100% do valor de volta. Sem justificativa e sem formulário.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERGUNTAS -->
+  <section class="faixa cotada">
+    <div class="medida">
+      <p class="rotulo">Perguntas</p>
+      <h2 style="font-size:clamp(1.7rem,3.9vw,2.7rem)">O que costumam me perguntar antes</h2>
+
+      <div class="perguntas">
+        <details class="pergunta">
+          <summary>Quanto tempo leva para preencher?</summary>
+          <p class="resp">Cerca de 15 minutos, se você tiver os números dos últimos 6 meses à mão: faturamento, número de clientes e custos. Não precisa ser exato ao centavo — precisa ser honesto.</p>
+        </details>
+        <details class="pergunta">
+          <summary>E se eu não tiver todos os dados?</summary>
+          <p class="resp">Preencha o que tem. O Mapa foi construído exatamente para isso: onde falta informação, ele marca como lacuna e te diz o que você deixa de saber por causa disso. Ele não trava e não inventa número.</p>
+        </details>
+        <details class="pergunta">
+          <summary>Serve para clínica de estética?</summary>
+          <p class="resp">Serve para qualquer negócio que venda serviço de forma recorrente — e clínica de estética é o caso mais direto: você tem ticket variável, cliente que volta (ou não) e margem que aperta sem avisar.</p>
+        </details>
+        <details class="pergunta">
+          <summary>É um curso? Uma aula?</summary>
+          <p class="resp">Não. É uma ferramenta. Você preenche, ela analisa, você recebe o diagnóstico e a rota. Não tem aula para assistir, não tem grupo de WhatsApp, não tem live.</p>
+        </details>
+        <details class="pergunta">
+          <summary>O Mapa vai executar por mim?</summary>
+          <p class="resp">Não. Ele te diz onde mexer, o que fazer primeiro, o que medir e o que observar. A execução é sua. Se você quiser acompanhamento durante a execução, aí é outra conversa — e ela existe.</p>
+        </details>
+        <details class="pergunta">
+          <summary>E se não servir para mim?</summary>
+          <p class="resp">Você tem 7 dias para pedir o reembolso e recebe 100% do valor de volta, sem precisar justificar.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FECHO -->
+  <section class="faixa cotada escuro fecho">
+    <div class="medida">
+      <p class="rotulo">Daqui a 90 dias</p>
+      <h2>Você vai fechar este mês de novo sem saber por que ele foi bom ou ruim?</h2>
+
+      <div class="caminhos">
+        <div class="caminho">
+          <b>Se nada mudar</b>
+          <p>Você continua tentando resolver os cinco problemas ao mesmo tempo, sem saber qual deles é o que importa. O faturamento continua oscilando e você continua achando que é época.</p>
+        </div>
+        <div class="caminho bom">
+          <b>Com o Mapa</b>
+          <p>Você sabe qual é a sua trava. Sabe o que está fazendo para destravá-la. E sabe o que vai medir para ter certeza de que funcionou.</p>
+        </div>
+      </div>
+
+      <div class="fecho-cta">
+        <p>A diferença entre os dois custa R$ 49,90 e 15 minutos.</p>
+        <!-- TODO: trocar href="#" pelo link do checkout quando estiver pronto -->
+        <a class="btn btn-terra" href="#">Quero meu Mapa do Crescimento</a>
+        <p class="fecho-selo">Acesso imediato · 7 dias de garantia · Pagamento único</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PONTE -->
+  <section class="ponte">
+    <div class="medida ponte-grade">
+      <h3>E quando eu precisar de ajuda para executar?</h3>
+      <div>
+        <p>O Mapa entrega direção, prioridade, ações e indicadores. É o que uma ferramenta consegue fazer bem — e ela faz.</p>
+        <p>O que ela não faz: adaptar a rota quando a realidade muda no meio do caminho, montar processo, treinar time, sentar com você toda semana para decidir o próximo movimento.</p>
+        <p>Isso é consultoria. E ela existe, para quem chegar nesse ponto.</p>
+        <a class="btn btn-linha btn-peq" href="#">Conhecer o acompanhamento estratégico</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="rodape">
+  <div class="medida">
+    <a class="marca" href="#topo">
+      <svg viewBox="128 0 240 220" aria-hidden="true">
+        <g fill="currentColor">
+          <path d="M150 196c0-30 9-50 27-62v78h-27z"/>
+          <path d="M204 212V128c0-32 11-54 32-68v152h-32z"/>
+          <path d="M272 212c14-6 20-18 20-38V62l30-22v172h-50z"/>
+        </g>
+        <path class="accent" fill="none" stroke="#B96347" stroke-width="7" stroke-linecap="round" d="M140 202c4-52 30-96 80-128 28-18 60-32 100-46"/>
+        <path class="accent" fill="#B96347" d="M322 4l7 26 26 7-26 7-7 26-7-26-26-7 26-7z"/>
+      </svg>
+      <span class="marca-txt">Mariana Freitas<span>Crescimento Empresarial</span></span>
+    </a>
+    <p>© 2026 Mariana Freitas · Crescimento Empresarial</p>
+  </div>
+</footer>
+
+<div class="barra-movel">
+  <!-- TODO: trocar href="#" pelo link do checkout quando estiver pronto -->
+  <a class="btn btn-terra" href="#">Quero meu Mapa — R$ 49,90</a>
+</div>
+
+</body>
+</html>
