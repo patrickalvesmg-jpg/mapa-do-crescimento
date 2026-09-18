@@ -263,20 +263,64 @@ a{color:inherit}
 .ancora p{font-size:16.5px;line-height:1.68;color:#4A545B;max-width:38em}
 .ancora p + p{margin-top:1rem}
 .ancora strong{color:var(--tinta);font-weight:600}
-.caixa{background:var(--tinta);color:var(--texto);padding:2.1rem 1.9rem;border-radius:4px}
-.caixa .de{font-size:15px;color:#9FAAB2;margin-bottom:.35rem;font-weight:500}
-.caixa .de s{color:var(--terra-clara);text-decoration-thickness:2px;font-weight:600}
-.caixa .preco{display:flex;align-items:baseline;gap:.45rem;margin-bottom:.4rem}
+.caixa-zona{position:relative;isolation:isolate}
+/* halo: o card emerge do fundo */
+.caixa-zona::before{
+  content:"";position:absolute;z-index:-1;
+  inset:-14% -10% -10% -10%;
+  background:radial-gradient(60% 55% at 50% 42%,rgba(185,99,71,.30),transparent 70%);
+  filter:blur(26px);pointer-events:none;
+}
+.caixa{
+  position:relative;background:var(--tinta);color:var(--texto);
+  padding:2.6rem 2rem 2.1rem;border-radius:6px;
+  border:1px solid rgba(217,138,108,.5);
+  box-shadow:0 26px 60px -16px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset;
+}
+/* selo na quebra da borda */
+.selo-oferta{
+  position:absolute;top:0;left:50%;transform:translate(-50%,-50%);
+  background:#A44E33;color:#fff;white-space:nowrap;
+  font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;padding:.52rem 1.1rem;border-radius:3px;
+  box-shadow:0 6px 18px -4px rgba(0,0,0,.5);
+}
+/* linha de/por + preco grande lado a lado */
+.preco-linha{margin-bottom:.5rem}
+.caixa .de{
+  display:flex;align-items:baseline;gap:.4rem;
+  font-size:14.5px;color:#9FAAB2;font-weight:500;margin-bottom:.15rem;
+}
+.caixa .de s{color:var(--terra-clara);font-size:1.18rem;font-weight:600;
+  text-decoration-thickness:2px;font-family:var(--serif)}
+.caixa .preco{display:flex;align-items:baseline;gap:.4rem}
 .caixa .preco .cifra{font-family:var(--serif);font-size:1.5rem;color:var(--texto-forte);font-weight:600}
-.caixa .preco .num{font-family:var(--serif);font-size:clamp(3rem,7vw,3.9rem);line-height:1;color:var(--texto-forte);font-weight:600;letter-spacing:-.03em}
-.caixa .cond{font-size:14.5px;color:var(--mutado);margin-bottom:1.6rem}
-.caixa .btn{width:100%;padding-block:1.15rem}
-.caixa ul{list-style:none;margin:1.4rem 0 0;padding:1.3rem 0 0;border-top:1px solid var(--linha-forte);display:grid;gap:.62rem}
+.caixa .preco .num{
+  font-family:var(--serif);font-size:clamp(3.6rem,9vw,5rem);line-height:.88;
+  color:var(--texto-forte);font-weight:600;letter-spacing:-.035em;
+}
+.parcela{font-size:14.6px;color:#A9B7BF;margin-bottom:.35rem}
+.parcela b{color:var(--texto-forte);font-weight:600}
+.economia{
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:rgba(154,174,142,.14);border:1px solid rgba(154,174,142,.32);
+  color:#B9CBAC;font-size:13.2px;font-weight:600;
+  padding:.4rem .75rem;border-radius:3px;margin-bottom:1.5rem;
+}
+.caixa .cond{font-size:13.8px;color:var(--mutado);margin-bottom:1.5rem}
+.caixa .btn{width:100%;padding-block:1.25rem;font-size:17px;box-shadow:0 10px 26px -8px rgba(164,78,51,.7)}
+.sob-btn{margin-top:.8rem;font-size:13px;color:#93A0A8;text-align:center;line-height:1.5}
+.caixa ul{list-style:none;margin:1.5rem 0 0;padding:1.4rem 0 0;border-top:1px solid rgba(255,255,255,.1);display:grid;gap:.62rem}
 .caixa li{font-size:14.6px;color:#AEBAC2;position:relative;padding-left:1.5rem;line-height:1.5}
 .caixa li::before{content:"";position:absolute;left:0;top:.52em;width:7px;height:7px;background:#9AAE8E;border-radius:50%}
 .garantia{margin-top:1.4rem;padding:1.15rem 1.25rem;background:rgba(154,174,142,.10);border-left:3px solid #9AAE8E;border-radius:0 3px 3px 0}
 .garantia b{display:block;font-family:var(--serif);font-size:1.02rem;color:var(--texto-forte);margin-bottom:.4rem}
 .garantia p{font-size:14.3px;line-height:1.58;color:#AEBAC2}
+@media (max-width:640px){
+  .caixa{padding:2.4rem 1.4rem 1.8rem}
+  .preco-linha{gap:.8rem}
+  .caixa-zona::before{inset:-8% -4% -6% -4%}
+}
 @media (max-width:860px){.oferta{grid-template-columns:1fr;gap:2.4rem}}
 
 
@@ -678,29 +722,38 @@ a{color:inherit}
         <p>Isso custou muito mais que R$ 49,90.</p>
       </div>
 
+      <div class="caixa-zona">
       <div class="caixa">
-        <p class="de">De <s>R$ 100</s> por</p>
-        <div class="preco">
-          <span class="cifra">R$</span>
-          <span class="num">49,90</span>
+        <span class="selo-oferta">Oferta de lançamento</span>
+
+        <div class="preco-linha">
+          <p class="de">De <s>R$ 100</s> por apenas</p>
+          <div class="preco">
+            <span class="cifra">R$</span>
+            <span class="num">49,90</span>
+          </div>
         </div>
+        <p class="parcela">ou <b>3× de R$ 16,63</b> sem juros</p>
+        <p class="economia">Você economiza R$ 50,10 &middot; 50% de desconto</p>
         <p class="cond">Pagamento único. Sem mensalidade, sem assinatura.</p>
 
         <!-- TODO: trocar href="#" pelo link do checkout quando estiver pronto -->
         <a class="btn btn-terra" href="#">Quero meu Mapa agora</a>
+        <p class="sob-btn">Acesso imediato por e-mail · 7 dias de garantia</p>
 
         <ul>
-          <li>Acesso imediato por e-mail após a confirmação do pagamento</li>
-          <li>Preenchimento de cerca de 15 minutos</li>
           <li>Diagnóstico dos seus últimos 6 meses</li>
           <li>Sua trava prioritária nomeada, com as evidências</li>
           <li>Rota de 90 dias em 6 ciclos</li>
+          <li>O mapa das suas lacunas</li>
+          <li>Preenchimento de cerca de 15 minutos</li>
         </ul>
 
         <div class="garantia">
           <b>7 dias de garantia incondicional</b>
           <p>Preencha, veja o seu diagnóstico e a sua rota. Se o Mapa não te mostrar nada que você já não soubesse sobre a sua própria clínica, você pede o reembolso e recebe 100% do valor de volta. Sem justificativa e sem formulário.</p>
         </div>
+      </div>
       </div>
     </div>
   </section>
