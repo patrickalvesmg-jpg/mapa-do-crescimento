@@ -88,12 +88,10 @@ a{color:inherit}
   position:sticky;top:0;z-index:50;background:rgba(16,27,35,.90);
   backdrop-filter:blur(12px);border-bottom:1px solid var(--linha);
 }
-.topo .medida{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:74px}
-.marca{display:flex;align-items:center;gap:.8rem;color:var(--texto-forte);text-decoration:none}
-.marca svg{width:46px;height:auto;flex:none}
-.marca .accent{color:var(--terra-clara);fill:var(--terra-clara);stroke:var(--terra-clara)}
-.marca-txt{font-family:var(--serif);font-size:16px;font-weight:600;line-height:1.1;letter-spacing:.01em}
-.marca-txt span{display:block;font-family:var(--sans);font-size:10.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#8C9A86;margin-top:3px}
+.topo .medida{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:88px}
+.marca{display:block;text-decoration:none;line-height:0}
+.marca img{height:62px;width:auto}
+.rodape .marca img{height:78px}
 
 /* ---------- botões ---------- */
 .btn{
@@ -261,11 +259,16 @@ a{color:inherit}
 }
 
 /* ---------- oferta ---------- */
-.oferta{display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(2.2rem,5vw,4rem);align-items:center}
+.oferta{display:block}
+.oferta .ancora{max-width:44em}
+.pilha-wrap{margin-top:2.6rem}
+.oferta .caixa{margin-top:2rem;max-width:560px}
 .ancora p{font-size:16.5px;line-height:1.68;color:#4A545B;max-width:38em}
 .ancora p + p{margin-top:1rem}
 .ancora strong{color:var(--tinta);font-weight:600}
 .caixa{background:var(--tinta);color:var(--texto);padding:2.1rem 1.9rem;border-radius:4px}
+.caixa .de{font-size:14.5px;color:#9FAAB2;margin-bottom:.5rem}
+.caixa .de s{color:var(--terra-clara);text-decoration-thickness:2px}
 .caixa .preco{display:flex;align-items:baseline;gap:.45rem;margin-bottom:.4rem}
 .caixa .preco .cifra{font-family:var(--serif);font-size:1.5rem;color:var(--texto-forte);font-weight:600}
 .caixa .preco .num{font-family:var(--serif);font-size:clamp(3rem,7vw,3.9rem);line-height:1;color:var(--texto-forte);font-weight:600;letter-spacing:-.03em}
@@ -278,6 +281,35 @@ a{color:inherit}
 .garantia b{display:block;font-family:var(--serif);font-size:1.02rem;color:var(--texto-forte);margin-bottom:.4rem}
 .garantia p{font-size:14.3px;line-height:1.58;color:#AEBAC2}
 @media (max-width:860px){.oferta{grid-template-columns:1fr;gap:2.4rem}}
+
+
+/* ---------- empilhamento de valor ---------- */
+.pilha{margin-top:2rem;border-top:1px solid #C9BFAE}
+.pilha-item{
+  display:grid;grid-template-columns:1fr auto;gap:1.2rem;align-items:baseline;
+  padding:1.05rem 0;border-bottom:1px solid #C9BFAE;
+}
+.pilha-item h4{font-size:1.02rem;line-height:1.3;margin-bottom:.25rem;color:var(--tinta)}
+.pilha-item p{font-size:14.2px;line-height:1.5;color:#5C666D;max-width:44em}
+.pilha-val{
+  font-family:var(--sans);font-size:15px;font-weight:600;color:#6E7880;white-space:nowrap;
+  text-align:right;
+}
+.pilha-soma{
+  display:grid;grid-template-columns:1fr auto;gap:1.2rem;align-items:baseline;
+  padding:1.3rem 0 0;
+}
+.pilha-soma b{font-family:var(--serif);font-size:1.15rem;color:var(--tinta);font-weight:600}
+.pilha-soma .tot{
+  font-family:var(--serif);font-size:1.5rem;font-weight:600;color:#6E7880;
+  text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:#A44E33;
+  white-space:nowrap;
+}
+
+@media (max-width:640px){
+  .pilha-item,.pilha-soma{grid-template-columns:1fr;gap:.35rem}
+  .pilha-val,.pilha-soma .tot{text-align:left}
+}
 
 /* ---------- perguntas ---------- */
 .perguntas{margin-top:2.8rem;max-width:58em;border-top:1px solid var(--linha)}
@@ -321,8 +353,6 @@ a{color:inherit}
 /* ---------- rodapé ---------- */
 .rodape{background:var(--superficie);color:#8898A2;padding:3rem 0 2.4rem;font-size:13.5px;border-top:1px solid var(--linha)}
 .rodape .medida{display:flex;flex-wrap:wrap;gap:1.6rem;justify-content:space-between;align-items:center}
-.rodape .marca{color:var(--texto-forte)}
-.rodape .marca-txt span{color:#8898A2}
 .rodape a{color:#A9B7BF}
 
 /* ---------- mobile ---------- */
@@ -369,7 +399,6 @@ a{color:inherit}
   .ponte-grade{text-align:center}
   .ponte p,.ponte h3{margin-inline:auto}
   .rodape .medida{justify-content:center;text-align:center}
-  .rodape .marca{justify-content:center}
 }
 
 /* barra fixa mobile */
@@ -389,18 +418,7 @@ a{color:inherit}
 
 <header class="topo">
   <div class="medida">
-    <a class="marca" href="#topo">
-      <svg viewBox="128 0 240 220" aria-hidden="true">
-        <g fill="currentColor">
-          <path d="M150 196c0-30 9-50 27-62v78h-27z"/>
-          <path d="M204 212V128c0-32 11-54 32-68v152h-32z"/>
-          <path d="M272 212c14-6 20-18 20-38V62l30-22v172h-50z"/>
-        </g>
-        <path class="accent" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" d="M140 202c4-52 30-96 80-128 28-18 60-32 100-46"/>
-        <path class="accent" d="M322 4l7 26 26 7-26 7-7 26-7-26-26-7 26-7z" stroke="none"/>
-      </svg>
-      <span class="marca-txt">Mariana Freitas<span>Crescimento Empresarial</span></span>
-    </a>
+    <a class="marca" href="#topo"><img src="assets/logo-clara.png" alt="Mariana Freitas — Crescimento Empresarial"></a>
     <a class="btn btn-tinta btn-peq" href="#oferta">Quero meu Mapa</a>
   </div>
 </header>
@@ -691,7 +709,47 @@ a{color:inherit}
         <p>Isso custou muito mais que R$ 49,90.</p>
       </div>
 
+      <div class="pilha-wrap">
+        <div class="pilha">
+          <div class="pilha-item">
+            <div>
+              <h4>Diagnóstico dos seus últimos 6 meses</h4>
+              <p>Faturamento, clientes, ticket, conversão e margem calculados — com o que cresceu, o que travou e o que só parecia crescer.</p>
+            </div>
+            <div class="pilha-val">R$ 800</div>
+          </div>
+          <div class="pilha-item">
+            <div>
+              <h4>A sua trava prioritária, nomeada</h4>
+              <p>A análise que diz o que exatamente está segurando o crescimento agora, com as evidências que sustentam a conclusão.</p>
+            </div>
+            <div class="pilha-val">R$ 1.200</div>
+          </div>
+          <div class="pilha-item">
+            <div>
+              <h4>Rota de 90 dias em 6 ciclos</h4>
+              <p>Estratégia principal, ações, prazos, o que medir e o que aprender em cada ciclo de 15 dias.</p>
+            </div>
+            <div class="pilha-val">R$ 900</div>
+          </div>
+          <div class="pilha-item">
+            <div>
+              <h4>O mapa das suas lacunas</h4>
+              <p>A lista do que você não sabe sobre o próprio negócio — e o que cada buraco desses te impede de decidir.</p>
+            </div>
+            <div class="pilha-val">R$ 400</div>
+          </div>
+          <div class="pilha-soma">
+            <b>Contratado separadamente, isso custaria</b>
+            <div class="tot">R$ 3.300</div>
+          </div>
+        </div>
+
+
+      </div>
+
       <div class="caixa">
+        <p class="de">Tudo isso, que separado sairia <s>R$ 3.300</s></p>
         <div class="preco">
           <span class="cifra">R$</span>
           <span class="num">49,90</span>
@@ -795,18 +853,7 @@ a{color:inherit}
 
 <footer class="rodape">
   <div class="medida">
-    <a class="marca" href="#topo">
-      <svg viewBox="128 0 240 220" aria-hidden="true">
-        <g fill="currentColor">
-          <path d="M150 196c0-30 9-50 27-62v78h-27z"/>
-          <path d="M204 212V128c0-32 11-54 32-68v152h-32z"/>
-          <path d="M272 212c14-6 20-18 20-38V62l30-22v172h-50z"/>
-        </g>
-        <path class="accent" fill="none" stroke="#D98A6C" stroke-width="7" stroke-linecap="round" d="M140 202c4-52 30-96 80-128 28-18 60-32 100-46"/>
-        <path class="accent" fill="#D98A6C" d="M322 4l7 26 26 7-26 7-7 26-7-26-26-7 26-7z"/>
-      </svg>
-      <span class="marca-txt">Mariana Freitas<span>Crescimento Empresarial</span></span>
-    </a>
+    <a class="marca" href="#topo"><img src="assets/logo-clara.png" alt="Mariana Freitas — Crescimento Empresarial"></a>
     <p>© 2026 Mariana Freitas · Crescimento Empresarial</p>
   </div>
 </footer>
