@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Roteiros de Anúncio — Mapa do Crescimento</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@page{size:A4;margin:18mm 16mm 16mm;}
+@page:first{margin:0;}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --marfim:#F3EEE5; --tinta:#15232D; --terra:#B96347;
+  --oliva:#747A64; --grafite:#292D30;
+  --linha:#D9D1C4; --mutado:#6A7076;
+}
+body{font-family:"Inter",sans-serif;color:var(--grafite);font-size:10.5pt;line-height:1.55;background:#fff}
+h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:600;color:var(--tinta);line-height:1.15}
+
+/* ---------- CAPA ---------- */
+.capa{
+  height:297mm;background:var(--tinta);color:var(--marfim);
+  padding:34mm 24mm;display:flex;flex-direction:column;justify-content:space-between;
+  page-break-after:always;position:relative;overflow:hidden;
+}
+.capa::after{
+  content:"";position:absolute;width:170mm;height:170mm;border-radius:50%;
+  right:-70mm;top:-60mm;background:#B96347;opacity:.20;
+}
+.capa-topo{position:relative;z-index:1}
+.capa img{height:34mm;margin-bottom:16mm}
+.capa .eyebrow{
+  font-size:8.5pt;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:#D98A6C;margin-bottom:8mm;
+}
+.capa h1{font-size:34pt;color:var(--marfim);text-transform:uppercase;letter-spacing:-.01em;line-height:1.08;max-width:150mm}
+.capa .sub{margin-top:9mm;font-size:12pt;color:#BCC8CF;line-height:1.6;max-width:125mm}
+.capa-rodape{position:relative;z-index:1;border-top:1px solid rgba(243,238,229,.25);padding-top:7mm;font-size:9.5pt;color:#9FAEB7}
+.capa-rodape b{color:var(--marfim);font-weight:600;display:block;margin-bottom:2mm;font-size:10.5pt}
+
+/* ---------- SUMÁRIO ---------- */
+.indice{page-break-after:always}
+.sec-titulo{
+  font-size:8.5pt;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--terra);margin-bottom:5mm;display:flex;align-items:center;gap:3mm;
+  font-family:"Inter",sans-serif;
+}
+.sec-titulo::before{content:"";width:9mm;height:1.6pt;background:var(--terra)}
+.indice h2{font-size:22pt;margin-bottom:8mm}
+.idx{width:100%;border-collapse:collapse;margin-top:6mm}
+.idx th{
+  text-align:left;font-size:8pt;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--mutado);padding:0 0 3mm;border-bottom:1.2pt solid var(--linha);
+}
+.idx td{padding:3.4mm 0;border-bottom:.6pt solid var(--linha);vertical-align:top;font-size:10pt}
+.idx td:first-child{width:14mm;font-weight:700;color:var(--terra);font-family:"Fraunces",serif;font-size:12pt}
+.idx td:last-child{width:26mm;text-align:right;color:var(--mutado);font-size:9pt;white-space:nowrap}
+.idx .nome{font-weight:600;color:var(--tinta);display:block}
+.idx .gancho{color:var(--mutado);font-size:9pt;font-style:italic;display:block;margin-top:1mm}
+.nota{
+  margin-top:10mm;padding:6mm 7mm;background:var(--marfim);border-left:3pt solid var(--oliva);
+  font-size:9.5pt;line-height:1.6;
+}
+.nota b{color:var(--tinta)}
+
+/* ---------- ROTEIROS ---------- */
+.roteiro{page-break-before:always}
+.r-topo{border-bottom:1.5pt solid var(--tinta);padding-bottom:4mm;margin-bottom:7mm}
+.r-num{
+  font-family:"Inter",sans-serif;font-size:8pt;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--terra);margin-bottom:2.5mm;
+}
+.r-topo h2{font-size:19pt;margin-bottom:3mm}
+.r-meta{font-size:9pt;color:var(--mutado)}
+.r-meta span{display:inline-block;background:var(--marfim);padding:1.2mm 3mm;border-radius:2pt;margin-right:2mm;font-weight:600;color:#4A545B}
+.fala{font-size:11pt;line-height:1.75;color:#20282E}
+.fala p{margin-bottom:4.5mm}
+.fala p.abre{
+  font-family:"Fraunces",Georgia,serif;font-size:14pt;line-height:1.35;color:var(--tinta);
+  font-weight:600;margin-bottom:6mm;padding-left:5mm;border-left:2.5pt solid var(--terra);
+}
+.rodape-pg{
+  position:fixed;bottom:6mm;left:0;right:0;font-size:8pt;color:#98A0A6;
+  display:flex;justify-content:space-between;border-top:.6pt solid var(--linha);padding-top:2.5mm;
+}
+</style>
+</head>
+<body>
+
+<!-- CAPA -->
+<section class="capa">
+  <div class="capa-topo">
+    <img src="LOGO_PATH" alt="Mariana Freitas">
+    <p class="eyebrow">Mapa do Crescimento</p>
+    <h1>Roteiros de anúncio</h1>
+    <p class="sub">11 roteiros para tráfego pago no Meta, escritos para donas de clínica estética com faturamento entre R$ 20 e 40 mil por mês.</p>
+  </div>
+  <div class="capa-rodape">
+    <b>Mariana Freitas · Crescimento Empresarial</b>
+    Setembro de 2026 · Material de produção
+  </div>
+</section>
+
+<!-- SUMÁRIO -->
+<section class="indice">
+  <p class="sec-titulo">Sumário</p>
+  <h2>Os 11 roteiros</h2>
+
+  <table class="idx">
+    <thead><tr><th></th><th>Roteiro e gancho de abertura</th><th>Duração</th></tr></thead>
+    <tbody>
+      <tr><td>01</td><td><span class="nome">O pacote que virou dívida</span><span class="gancho">"Você vendeu dez sessões e recebeu por dez. Mas entregou três."</span></td><td>75–85s</td></tr>
+      <tr><td>02</td><td><span class="nome">O mês bom que não se repete</span><span class="gancho">"Sua clínica teve um mês de quarenta e dois mil no ano passado."</span></td><td>75–85s</td></tr>
+      <tr><td>03</td><td><span class="nome">O aparelho financiado parado</span><span class="gancho">"Tem um aparelho na sua clínica que você ainda está pagando e quase não usa."</span></td><td>75–85s</td></tr>
+      <tr><td>04</td><td><span class="nome">Terça-feira às 14h</span><span class="gancho">"Terça-feira, duas da tarde. Sua clínica está vazia."</span></td><td>75–85s</td></tr>
+      <tr><td>05</td><td><span class="nome">O procedimento que você mais faz</span><span class="gancho">"Qual é o procedimento que você mais faz na sua clínica?"</span></td><td>75–85s</td></tr>
+      <tr><td>06</td><td><span class="nome">Faturou bem e não sobrou</span><span class="gancho">"Sua clínica faturou trinta e oito mil esse mês. E sobrou três."</span></td><td>75–85s</td></tr>
+      <tr><td>07</td><td><span class="nome">A avaliação que não fechou</span><span class="gancho">"Você fez seis avaliações na sua clínica essa semana. Fechou duas."</span></td><td>40s</td></tr>
+      <tr><td>08</td><td><span class="nome">Produto vencendo</span><span class="gancho">"Vai no seu armário agora e olha a validade do seu ácido hialurônico."</span></td><td>40s</td></tr>
+      <tr><td>09</td><td><span class="nome">A cliente do combo</span><span class="gancho">"Sua cliente fez o combo de dez sessões. E nunca mais voltou."</span></td><td>40s</td></tr>
+      <tr><td>10</td><td><span class="nome">Pró-labore</span><span class="gancho">"Quanto você tirou de salário da sua clínica no mês passado?"</span></td><td>40s</td></tr>
+      <tr><td>11</td><td><span class="nome">A concorrente que abriu perto</span><span class="gancho">"Abriu uma clínica nova a três quadras. Com aparelho melhor que o seu."</span></td><td>40s</td></tr>
+    </tbody>
+  </table>
+
+  <div class="nota">
+    <b>Como usar.</b> Cada roteiro entra por uma situação diferente, mas todos chegam ao mesmo lugar: a engenharia da Mariana, as três entregas do Mapa e o mesmo convite final. Essa combinação dá ao Meta a variedade que o sistema de entrega premia, sem diluir a marca.<br><br>
+    <b>Antes de subir a campanha:</b> instalar o Pixel do Meta na landing page e definir o link de checkout. Sem os dois, não há como otimizar por conversão.
+  </div>
+</section>
+
+ROTEIROS_AQUI
+
+</body>
+</html>
